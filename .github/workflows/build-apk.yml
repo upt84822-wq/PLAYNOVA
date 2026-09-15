@@ -24,10 +24,20 @@ jobs:
           channel: stable
           cache: true
 
+      - name: Configure Gradle memory
+        run: |
+          mkdir -p android
+          cat > android/gradle.properties <<'EOF'
+          android.useAndroidX=true
+          android.enableJetifier=true
+          org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=1g -Dfile.encoding=UTF-8
+          org.gradle.workers.max=2
+          EOF
+
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Build signed debug APK
+      - name: Build debug APK
         run: flutter build apk --debug
 
       - name: Upload APK
