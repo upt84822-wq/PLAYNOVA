@@ -1,0 +1,3 @@
+import 'package:flutter/material.dart'; import '../_game_utils.dart';
+class BasketballGame extends StatefulWidget{const BasketballGame({super.key});@override State<BasketballGame> createState()=>_S();}
+class _S extends State<BasketballGame>{int score=0;void tap(){setState(()=>score++);if(score>=10)finishGame(context,score*50,true);}@override Widget build(c)=>GameShell(title:'Basketball',onRestart:()=>setState(()=>score=0),child:Center(child:Column(mainAxisAlignment:MainAxisAlignment.center,children:[const Icon(Icons.sports_basketball,size:120),Text('Score: $score',style:const TextStyle(fontSize:28)),const SizedBox(height:20),FilledButton.icon(onPressed:tap,icon:const Icon(Icons.touch_app),label:const Text('SHOOT'))])));}
